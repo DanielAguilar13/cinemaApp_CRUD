@@ -1,1 +1,406 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+:root {
+    --bg: #f6f8fc;
+    --fg: #0f172a;
+    --muted: #475569;
+    --card: #ffffff;
+
+    --primary: #3f51b5;
+    /* Indigo */
+    --primary-contrast: #ffffff;
+    --accent: #7c4dff;
+    /* Deep Purple A200 */
+    --accent-contrast: #ffffff;
+
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #e11d48;
+
+    --ring: 0 0 0 3px rgba(63, 81, 181, .18);
+    --shadow-sm: 0 4px 14px rgba(2, 6, 23, .06);
+    --shadow-md: 0 10px 24px rgba(2, 6, 23, .08);
+
+    --radius: 14px;
+    --radius-sm: 10px;
+
+    --container: 1120px;
+    --gap: 16px;
+
+    --surface-1: #ffffff;
+    --surface-2: #f1f5f9;
+    --surface-3: #e9eef6;
+
+    --link: #3949ab;
+}
+
+
+/* -------------------------------------------------------
+   Reset & base
+------------------------------------------------------- */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* Enlaces */
+a,
+a[mat-button] {
+    color: var(--link);
+    text-decoration: none;
+}
+
+a:hover,
+a[mat-button]:hover {
+    text-decoration: underline;
+}
+
+/* Contenedor */
+.container {
+    max-width: var(--container);
+    margin: 24px auto;
+    padding: 0 16px;
+}
+
+/* Transiciones suaves y accesibilidad */
+* {
+    transition: background-color .25s ease, color .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+}
+
+/* Scrollbar sutil */
+*::-webkit-scrollbar {
+    height: 10px;
+    width: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--primary), var(--accent));
+    border-radius: 10px;
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* -------------------------------------------------------
+   Cards / superficies
+------------------------------------------------------- */
+.card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    padding: 16px;
+    border: 1px solid rgba(2, 6, 23, .06);
+}
+
+.card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+/* Secciones/Páginas */
+.page {
+    display: grid;
+    gap: 16px;
+}
+
+/* Encabezado de página */
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.page-title {
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: .2px;
+}
+
+/* -------------------------------------------------------
+   Angular Material – Toolbar & Buttons
+------------------------------------------------------- */
+.mat-toolbar {
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    color: var(--primary-contrast);
+}
+
+.mat-toolbar a[mat-button] {
+    color: var(--primary-contrast);
+    opacity: .9;
+}
+
+.mat-toolbar a[mat-button].active {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+button[mat-raised-button],
+button[mat-flat-button],
+button[mat-stroked-button],
+button[mat-icon-button],
+button[mat-button] {
+    border-radius: 10px !important;
+}
+
+button:focus-visible,
+a[mat-button]:focus-visible,
+.mat-mdc-button:focus-visible {
+    outline: none;
+    box-shadow: var(--ring);
+}
+
+/* Botones de feedback */
+.btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* -------------------------------------------------------
+   Formularios
+------------------------------------------------------- */
+.form-grid {
+    display: grid;
+    gap: 16px;
+}
+
+@media (min-width: 720px) {
+    .form-grid.two-cols {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Mat form fields – mejora de contraste */
+.mdc-text-field--outlined {
+    background: var(--surface-1);
+}
+
+.mat-mdc-form-field-subscript-wrapper {
+    opacity: .9;
+}
+
+.mat-mdc-form-field {
+    width: 100%;
+}
+
+/* Placeholders más sutiles */
+::placeholder {
+    color: var(--muted);
+    opacity: .85;
+}
+
+/* Slide toggle alineado */
+.mat-mdc-slide-toggle {
+    --mdc-switch-selected-track-color: var(--primary);
+}
+
+/* Select */
+.mat-mdc-select-panel {
+    border-radius: 12px !important;
+}
+
+/* -------------------------------------------------------
+   Tablas (Angular Material Table)
+------------------------------------------------------- */
+table.mat-mdc-table {
+    background: var(--card);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.mat-mdc-header-row {
+    background: linear-gradient(90deg, var(--surface-3), var(--surface-2));
+}
+
+.mat-mdc-row:hover {
+    background: rgba(99, 102, 241, .07);
+}
+
+.mat-mdc-paginator {
+    background: transparent !important;
+}
+
+/* Encabezado sticky */
+.mat-mdc-table .mat-mdc-header-row {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+/* Celdas compactas (mejor densidad) */
+.mat-mdc-cell,
+.mat-mdc-header-cell {
+    padding: 12px 16px;
+    border-bottom-color: rgba(2, 6, 23, .07);
+}
+
+/* -------------------------------------------------------
+   Divisores, chips, snackbar, dialog
+------------------------------------------------------- */
+.mat-mdc-divider {
+    border-top-color: rgba(2, 6, 23, .08) !important;
+}
+
+.mdc-snackbar__surface {
+    border-radius: 12px !important;
+    box-shadow: var(--shadow-md) !important;
+}
+
+.mat-mdc-chip {
+    border-radius: 18px !important;
+}
+
+.mdc-dialog__surface {
+    border-radius: 16px !important;
+    background: var(--card) !important;
+}
+
+/* -------------------------------------------------------
+   Utilidades
+------------------------------------------------------- */
+.muted {
+    color: var(--muted);
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.gap-8 {
+    gap: 8px;
+}
+
+.gap-12 {
+    gap: 12px;
+}
+
+.gap-16 {
+    gap: 16px;
+}
+
+.mt-8 {
+    margin-top: 8px;
+}
+
+.mt-12 {
+    margin-top: 12px;
+}
+
+.mt-16 {
+    margin-top: 16px;
+}
+
+/* Contenedores de tabla con scroll */
+.table-wrap {
+    overflow: auto;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+}
+
+/* Tarjetas “clickables” */
+.card.clickable {
+    cursor: pointer;
+    transition: transform .12s ease, box-shadow .2s ease;
+}
+
+.card.clickable:hover {
+    transform: translateY(-2px);
+}
+
+/* -------------------------------------------------------
+   Inputs de búsqueda con icono (opcional)
+   Usa un <mat-icon> con clase .search-icon antes del input
+------------------------------------------------------- */
+.search-field {
+    position: relative;
+}
+
+.search-field .search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: .7;
+}
+
+.search-field input {
+    padding-left: 40px;
+}
+
+/* -------------------------------------------------------
+   Estado “loading” y “empty”
+------------------------------------------------------- */
+.state {
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    color: var(--muted);
+}
+
+.state .pulse {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--primary);
+    box-shadow: 0 0 0 0 rgba(63, 81, 181, .5);
+    animation: pulse 1.6s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(63, 81, 181, .5);
+    }
+
+    70% {
+        box-shadow: 0 0 0 16px rgba(63, 81, 181, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(63, 81, 181, 0);
+    }
+}
+
+/* -------------------------------------------------------
+   “Elevated surfaces” helpers
+------------------------------------------------------- */
+.surface {
+    background: var(--surface-1);
+    border: 1px solid rgba(2, 6, 23, .06);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+}
+
+.surface-2 {
+    background: var(--surface-2);
+}
+
+.surface-3 {
+    background: var(--surface-3);
+}

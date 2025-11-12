@@ -1,10 +1,11 @@
-import { Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import { MovieListComponent } from './movies/movie-list.component';
 import { MovieFormComponent } from './movies/movie-form.component';
 import { DirectorListComponent } from './directors/director-list.component';
 import { DirectorFormComponent } from './directors/director-form.component';
 
-export const routes: Routes = [
+const routes: Routes = [
     { path: '', redirectTo: 'movies', pathMatch: 'full' },
     { path: 'movies', component: MovieListComponent },
     { path: 'movies/new', component: MovieFormComponent },
@@ -14,3 +15,9 @@ export const routes: Routes = [
     { path: 'directors/:id', component: DirectorFormComponent },
     { path: '**', redirectTo: 'movies' }
 ];
+
+@NgModule({
+    imports: [RouterModule.forRoot(routes, { bindToComponentInputs: true })],
+    exports: [RouterModule]
+})
+export class AppRoutingModule { }

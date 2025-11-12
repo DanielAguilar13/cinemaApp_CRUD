@@ -1,0 +1,41 @@
+<div class="page-header">
+    <div style="display:flex; align-items:center; gap:10px;">
+        <button mat-stroked-button color="primary" routerLink="/directors">
+            <mat-icon>arrow_back</mat-icon>&nbsp;Volver
+        </button>
+        <h2 style="margin:0;">{{ id ? 'Editar director' : 'Nuevo director' }}</h2>
+    </div>
+    <div>
+        <a routerLink="/directors" style="display:inline-flex;align-items:center;gap:.25rem">
+            <mat-icon>arrow_back</mat-icon> Volver
+        </a>
+    </div>
+</div>
+
+<div class="card">
+    <form (ngSubmit)="save()" [formGroup]="form" class="form-grid two-cols">
+
+        <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="name" placeholder="Nombre del director">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Edad</mat-label>
+            <input matInput type="number" formControlName="age" placeholder="Ej. 53">
+        </mat-form-field>
+
+        <div style="grid-column: 1 / -1;">
+            <mat-slide-toggle formControlName="active">Activo</mat-slide-toggle>
+        </div>
+
+        <div style="grid-column: 1 / -1; display:flex; gap:10px; justify-content:flex-end;">
+            <button mat-raised-button color="primary" type="submit">
+                <mat-icon>save</mat-icon>&nbsp;Guardar
+            </button>
+            <button mat-stroked-button type="button" (click)="reset()">
+                <mat-icon>refresh</mat-icon>&nbsp;Limpiar
+            </button>
+        </div>
+    </form>
+</div>

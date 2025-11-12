@@ -1,0 +1,47 @@
+<mat-card class="card" style="grid-column: 1 / -1;">
+    <h2 style="display:flex;align-items:center;gap:.5rem">
+        <mat-icon>movie</mat-icon>
+        {{ id ? 'Editar película' : 'Nueva película' }}
+    </h2>
+    <a routerLink="/movies" style="display:inline-flex;align-items:center;gap:.25rem">
+        <mat-icon>arrow_back</mat-icon> Volver
+    </a>
+</mat-card>
+
+<mat-card class="card">
+    <form (ngSubmit)="save()" [formGroup]="form" style="display:grid; gap:1rem">
+        <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="name" placeholder="Ej. Inception">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Género</mat-label>
+            <input matInput formControlName="gender" placeholder="Ej. Sci-Fi">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Duración (HH:mm o HH:mm:ss)</mat-label>
+            <input matInput formControlName="duration" placeholder="02:28:00">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Director</mat-label>
+            <mat-select formControlName="fkDirector" required>
+                <mat-option [value]="0">— Elige —</mat-option>
+                <ng-container *ngFor="let d of directors">
+                    <mat-option [value]="d.id">{{ d.name }}</mat-option>
+                </ng-container>
+            </mat-select>
+        </mat-form-field>
+
+        <div style="display:flex; gap:.5rem; justify-content:flex-end">
+            <button mat-flat-button color="primary" type="submit">
+                <mat-icon>save</mat-icon>&nbsp;Guardar
+            </button>
+            <button mat-stroked-button type="button" (click)="reset()">
+                <mat-icon>refresh</mat-icon>&nbsp;Limpiar
+            </button>
+        </div>
+    </form>
+</mat-card>

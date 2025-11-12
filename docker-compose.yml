@@ -1,42 +1,37 @@
-version: "3.9"
-
 services:
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: sqlserver
     environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=Your_password123
-      - MSSQL_PID=Express
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Your_password123"
     ports:
       - "1433:1433"
     volumes:
-      - mssql_data:/var/opt/mssql
-
-  api:
+      - mssqldata:/var/opt/mssql
+    healthcheck:
+      test: /opt/mssql-tools18/bin/sqlcmd -S localhost,1433 -U sa -P "Your_password123" -C -Q "SELECT 1" || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  backend:
     build:
       context: ./Backend
       dockerfile: Dockerfile
-    container_name: api
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Production
-      # Estos solo los usa el entrypoint; la cadena real la toma de appsettings ("Docker")
-      - DB_HOST=sqlserver
-      - DB_PORT=1433
+    container_name: backend
     depends_on:
-      - sqlserver
+      sqlserver:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Production"
+      ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Database=CinemaDb;User Id=sa;Password=Your_password123;TrustServerCertificate=True;Encrypt=False"
     ports:
       - "5080:8080"
-
-  web:
-    build:
-      context: ./Frontend
-      dockerfile: Dockerfile
-    container_name: web
+  frontend:
+    build: ./Frontend
     depends_on:
-      - api
+      - backend
     ports:
-      - "4200:80"
-
+      - "8080:80"
 volumes:
-  mssql_data:
+  mssqldata: {}
