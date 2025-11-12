@@ -59,7 +59,7 @@ export class DirectorListComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        // Configurar filtro: buscar por nombre y edad (y activo como "si/no")
+
         this.data.filterPredicate = (row, filterValue) => {
             const f = (filterValue || '').trim().toLowerCase();
             if (!f) return true;
@@ -82,7 +82,7 @@ export class DirectorListComponent implements OnInit {
         this.api.list().subscribe({
             next: (items) => {
                 this.data.data = items ?? [];
-                // Reiniciar paginador al cargar
+
                 if (this.paginator) this.paginator.firstPage();
             },
             error: (e) => {

@@ -34,7 +34,6 @@ import { MatCardModule } from '@angular/material/card';
 export class MovieListComponent implements OnInit, AfterViewInit {
     displayedColumns = ['id', 'name', 'gender', 'duration', 'director', 'actions'];
 
-    // 👇 dataSource que el template usa como [dataSource]="data"
     data = new MatTableDataSource<Movie>([]);
 
     // Paginador y sort del template
