@@ -19,6 +19,7 @@ Permite administrar directores y películas (CRUD completo), conectados por rela
 Clona el repositorio
 
 https://github.com/DanielAguilar13/cinemaApp_CRUD.git
+
 cd cinemaApp_CRUD
 
 Construye y levanta los servicios
