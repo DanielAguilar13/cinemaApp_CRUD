@@ -26,6 +26,8 @@ Construye y levanta los servicios
 
 docker compose up --build
 
+http://localhost:8080/
+
 Para terminar con los contenedores 
 
 docker compose down -v
